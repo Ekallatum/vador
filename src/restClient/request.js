@@ -151,7 +151,12 @@ export class Request {
       });
     }
 
-    var promise = config.Promise.resolve(this);
+    var promise = null;
+    if('function' === typeof _config.config.Promise.all) {
+      promise = _config.config.Promise.all(this);
+    } else {  
+      promise = _config.config.Promise.resolve(this);
+    }
     while (chain.length) {
       let thenFn = chain.shift();
       let rejectFn = chain.shift();

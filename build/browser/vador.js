@@ -5244,7 +5244,7 @@ var _response = require('./response');
 
 var _coreBaseInterceptors = require('../core/baseInterceptors/');
 
-var _config = require('./config');
+var _config2 = require('./config');
 
 var Request = (function () {
   function Request(baseUrl, resourceName, restResource) {
@@ -5392,7 +5392,7 @@ var Request = (function () {
           if (error.status && error.status == 404) {
             return new _response.Response(null, error.res, request);
           } else {
-            return _config.config.Promise.reject(error);
+            return _config2.config.Promise.reject(error);
           }
         });
       };
@@ -5411,7 +5411,12 @@ var Request = (function () {
         });
       }
 
-      var promise = _config.config.Promise.resolve(this);
+      var promise = null;
+      if ('function' === typeof _config.config.Promise.all) {
+        promise = _config.config.Promise.all(this);
+      } else {
+        promise = _config.config.Promise.resolve(this);
+      }
       while (chain.length) {
         var thenFn = chain.shift();
         var rejectFn = chain.shift();
