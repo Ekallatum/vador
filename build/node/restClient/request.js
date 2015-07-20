@@ -14,7 +14,7 @@ var _response = require('./response');
 
 var _coreBaseInterceptors = require('../core/baseInterceptors/');
 
-var _config2 = require('./config');
+var _config = require('./config');
 
 var Request = (function () {
   function Request(baseUrl, resourceName, restResource) {
@@ -162,7 +162,7 @@ var Request = (function () {
           if (error.status && error.status == 404) {
             return new _response.Response(null, error.res, request);
           } else {
-            return _config2.config.Promise.reject(error);
+            return _config.config.Promise.reject(error);
           }
         });
       };

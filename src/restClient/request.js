@@ -152,10 +152,10 @@ export class Request {
     }
 
     var promise = null;
-    if('function' === typeof _config.config.Promise.all) {
-      promise = _config.config.Promise.all(this);
+    if('function' === typeof config.Promise.all) {
+      promise = config.Promise.all(this);
     } else {  
-      promise = _config.config.Promise.resolve(this);
+      promise = config.Promise.resolve(this);
     }
     while (chain.length) {
       let thenFn = chain.shift();
